@@ -7,7 +7,16 @@ const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
-app.use(cors());
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    FRONTEND_URL,
+  ],
+  credentials: true,
+}));
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
