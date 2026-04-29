@@ -4,7 +4,7 @@ A full-stack task management web application built as part of my internship asse
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Frontend
 | Technology | Purpose |
@@ -33,7 +33,7 @@ A full-stack task management web application built as part of my internship asse
 
 ---
 
-## ✨ Features Implemented
+## Features Implemented
 
 ### Authentication
 - [x] User registration with email & password
