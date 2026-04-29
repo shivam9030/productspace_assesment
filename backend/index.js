@@ -7,14 +7,25 @@ const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const FRONTEND_URL = (process.env.FRONTEND_URL || '').trim().replace(/\/$/, '');
 
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    FRONTEND_URL,
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      FRONTEND_URL
+    ];
+    // Allow requests with no origin (like mobile apps or curl) or if it's in the allowed list
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('Blocked by CORS:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
+  optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
